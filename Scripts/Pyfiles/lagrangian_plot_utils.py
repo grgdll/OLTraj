@@ -9,8 +9,8 @@ import ipdb
 
 
 def set_path():
-   pathin=os.path.join('..','..','..','Processed','Lagrangian_traj')
-   outdir=os.path.join('..','..','..','Figures','Lagrangian_traj')
+   pathin=os.path.join('..','..','Processed','Lagrangian_traj')
+   outdir=os.path.join('..','..','Figures','Lagrangian_traj')
    return pathin, outdir
 
 
