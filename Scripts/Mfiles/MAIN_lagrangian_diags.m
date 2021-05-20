@@ -17,9 +17,9 @@ function MAIN_lagrangian_diags(year,month)
 
    %=============================
    % Path to AVISO data and FSLE main directory
-   global DATADIR=['../../../Data/CMEMS/Daily/'];
+   global DATADIR=['../../Data/Daily/'];
    global LAMTADIR=['./Lamta.dev/'];
-   global outpath = '../../../Processed/Lagrangian_traj/';
+   global outpath = '../../Processed/Lagrangian_traj/';
    %=============================
 
    addpath(LAMTADIR)
