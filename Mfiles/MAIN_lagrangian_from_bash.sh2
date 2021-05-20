@@ -1,9 +1,0 @@
-#!/usr/bin/octave-cli
-
-# run in parallel using: echo {1999..2019..1}" "{1..12..1} | xargs -n2 | xargs -P7 -I{} sh -c 'V="{}"; echo MAIN_lagrangian_from_bash.sh2 ${V% *} ${V#* }' 
-
-# Arg 1 is the year to process 
-# Arg2 is the month
-
-args = argv()
-   MAIN_lagrangian_diags( str2num(args{1}), str2num(args{2}) );

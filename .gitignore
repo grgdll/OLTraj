@@ -1,0 +1,7 @@
+Data/*.nc
+Data/*.txt
+Processed/Lagrangian_traj/*/*.nc
+Processed/Lagrangian_traj/*.mat
+Data/Daily
+Scripts/Pyfiles/__pycache__/*
+Scripts/Mfiles/Lamta.dev/*
