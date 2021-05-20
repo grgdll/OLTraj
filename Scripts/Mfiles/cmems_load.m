@@ -13,7 +13,7 @@ if(length(dayf)>1)
 end
 
 % Test day to be loaded and retrieve values for few paramters
-onedayinupd=datenum([2019 4 1])-datenum([1950 1 1]);
+onedayinupd=datenum([2014 1 1])-datenum([1950 1 1]);
 
 disp(' ')
 disp('%--- Define the type of velocity field ---')
