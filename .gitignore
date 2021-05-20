@@ -1,3 +1,4 @@
 Data/*.nc
 Data/*.txt
 Processed/*.nc
+Data/Daily
