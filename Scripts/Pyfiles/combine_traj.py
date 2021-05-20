@@ -127,7 +127,8 @@ def combine_traj(year,month):
             os.makedirs(pathout)
         ds.to_netcdf(os.path.join(pathout,'%s_oltraj_uv_global.nc' % (day)),
                 encoding = {'trajlon' : {'scale_factor':adv_aviso['lon_scale_factor'],'add_offset':adv_aviso['lon_offset'],'dtype' : np.int16,'_FillValue' : 32767},
-                    'trajlat' : {'scale_factor':adv_aviso['lat_scale_factor'],'add_offset':adv_aviso['lat_offset'], 'dtype' : np.int16,'_FillValue' : 32767}})
+                    'trajlat' : {'scale_factor':adv_aviso['lat_scale_factor'],'add_offset':adv_aviso['lat_offset'], 'dtype' : np.int16,'_FillValue' : 32767},
+                    'time' : {'dtype': np.double, 'units': f"days since {year:04d}-{month:02d}-{day[-2:]} 00:00:00", 'calendar': "proleptic_gregorian"}})
         #============================
         # Need to remove original mat files once netcdf is created
         #============================
