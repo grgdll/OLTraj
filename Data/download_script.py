@@ -93,7 +93,7 @@ def main(year):
      
     product_id = 'dataset-duacs-rep-global-merged-allsat-phy-l4'
     service_id = 'SEALEVEL_GLO_PHY_L4_REP_OBSERVATIONS_008_047-TDS'
-    ficout_tags = ['JFM','AMJ','JAS','OND']
+    #ficout_tags = ['JFM','AMJ','JAS','OND']
     variables = "--variable ugos --variable vgos"
        
 
