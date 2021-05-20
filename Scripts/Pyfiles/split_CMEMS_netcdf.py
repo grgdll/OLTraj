@@ -10,7 +10,7 @@ import ipdb
 
 def main(year):
     # Get list of CMEMS files to process
-    pathin = '../../../Data/CMEMS/'
+    pathin = '../../Data/'
     #fname = 'dataset-duacs-rep-global-merged-allsat-phy-l4*.nc'
     fname = str(year)+'_???_DATASET-DUACS-REP-GLOBAL-MERGED-ALLSAT-PHY-L4.nc'
     flist = glob.glob(os.path.join(pathin,fname))
