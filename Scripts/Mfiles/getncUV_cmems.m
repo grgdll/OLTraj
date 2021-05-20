@@ -34,6 +34,13 @@ vvar = 'vgos';
 
 ncfile
 NbLongitudes=ncread(ncfile,'longitude');
+%=========================================
+% Lamta code assumes lon to be -180 180
+% Need to convert from 0 360 to -180 180
+if any(NbLongitudes>180)
+    NbLongitudes(NbLongitudes>180) = NbLongitudes(NbLongitudes>180)-360;
+end
+%=========================================
 NbLatitudes=ncread(ncfile,'latitude');
 U=ncread(ncfile,uvar)(:,:);
 V=ncread(ncfile,vvar)(:,:);
