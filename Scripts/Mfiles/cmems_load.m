@@ -1,6 +1,6 @@
-function [glon,glat,err]=cmems_load(day0,dayf)
+function [lonv,latv,uvmask,err,glon,glat]=cmems_load(day0,dayf)
 % Load cmems velocity field from AVISO
-% returns glon and glat used to initialize particle deployment
+% returns lonv and latv used in cmems_advect to initialize particle deployment
 
 err=0;
 
@@ -22,7 +22,7 @@ disp('%--- Define the type of velocity field ---')
 select(4); 
 
 % Load test day
-[glon,glat,Uw,Vw,lonw,latw]=getncUV_cmems(onedayinupd);
+[lonv,latv,uvmask,Uw,Vw,lonw,latw]=getncUV_cmems(onedayinupd);
 
 if(isempty(Uw))
 	disp(sprintf('Error in finding velocity files for reference day %d (upd).',onedayinupd));
@@ -58,7 +58,7 @@ ctr=0;
 % Cycle through each day
 for ctday=day0:1:dayf
 	% Read global velocity field 
-	[glon,glat,Uw,Vw,lonw,latw]=getncUV_cmems(ctday);
+	[lonv,latv,uvmask,Uw,Vw,lonw,latw]=getncUV_cmems(ctday);
 
 	if(isempty(Uw))
 		disp(sprintf('Error in finding nrt velocity files (day %d)',ctday));
