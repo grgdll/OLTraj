@@ -1,4 +1,4 @@
-function [lons,lats] = cmems_advect(dayv,long,latg,numdays,freeze,prodtag)
+function [lons,lats] = cmems_advect(dayv,lonv,latv,delta0,uvmask,numdays,freeze)
 tic()
 global outpath
 
@@ -7,6 +7,23 @@ day0=datenum(dayv)-datenum([1950 1 1]);
 
 dayf=day0+numdays;
 %----------------------------
+lonvv=lonv(1):delta0:lonv(end);
+latvv=latv(1):delta0:latv(end);
+% New grid (deployment)
+[long,latg]=meshgrid(lonvv,latvv);
+% Old grid (velocities)
+[lonmask,latmask]=meshgrid(lonv,latv);
+% New velocities used for masking
+uvmaskg = interp2(lonmask,latmask,double(uvmask'),long,latg);
+% Need to convert long from 0 360 to -180 180
+if any(any(long>180))
+    long(long>180) = long(long>180)-360;
+end
+% Mask points on land (velocity = 0)
+long(uvmaskg>=1)=NaN;
+latg(uvmaskg>=1)=NaN;
+
+% Array of initial deployment points
 pts=zeros(length(long(:))*2,1);
 pts(1:2:end)=long(:);
 pts(2:2:end)=latg(:);

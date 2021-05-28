@@ -1,4 +1,4 @@
-function [glon,glat,Uw,Vw,lonw,latw,U,V]=getncUV_cmems(nday)
+function [lonv,latv,uvmask,Uw,Vw,lonw,latw]=getncUV_cmems(nday)
 
 % Get date string
 ncnes=datenum([1950 1 1]);
@@ -34,6 +34,7 @@ vvar = 'vgos';
 
 ncfile
 NbLongitudes=ncread(ncfile,'longitude');
+lonv = NbLongitudes;
 %=========================================
 % Lamta code assumes lon to be -180 180
 % Need to convert from 0 360 to -180 180
@@ -42,6 +43,7 @@ if any(NbLongitudes>180)
 end
 %=========================================
 NbLatitudes=ncread(ncfile,'latitude');
+latv = NbLatitudes;
 U=ncread(ncfile,uvar)(:,:);
 V=ncread(ncfile,vvar)(:,:);
 %================================
@@ -60,18 +62,13 @@ nlat=length(NbLatitudes);
 
 lon=reshape(NbLongitudes,nlon,1);
 lat=reshape(NbLatitudes,nlat,1);
-% Create mask for initial deployment
-% (also used to derive deg velocities!!!)
+% Create mask to compute deg velocities!!!
 [glon,glat]=meshgrid(lon,lat);
 
 % Velocities in deg/s (Used in Lyap analysis)
 RT=6371e5;
 Ug=U./(RT.*cos(glat'./180*pi)).*180/pi;
 Vg=V*180/pi./RT;
-
-% Deployments on land points are masked
-glon(uvmask')=NaN;
-glat(uvmask')=NaN;
 
 lonw=lon;
 latw=lat;
@@ -88,9 +85,4 @@ Uw=Uw([1:nlon 1],:);
 Vw=Vw([1:nlon 1],:);
 lonw=lonw([1:nlon 1]);
 lonw(end)=lonw(end)+360;
-
-U=U(lonsrti,:);
-V=V(lonsrti,:);
-U=U([1:nlon 1],:);
-V=V([1:nlon 1],:);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

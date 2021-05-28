@@ -11,6 +11,9 @@ function MAIN_lagrangian_diags(year,month)
    freeze=0;
    % Used to define numdays!!!!
    advdays = 30;
+   % Used to define particle deployment resolution (hence howm ofter in space trajectories are computed)
+   % in degrees (lat or lon)
+   delta0 = 0.125; % 1/8 of degree
 
    pkg unload netcdf
    pkg load netcdf
@@ -46,7 +49,7 @@ function MAIN_lagrangian_diags(year,month)
          dayf=day0+numdays;
          % inilon and inilat to be used for particle deployment!!!
          tic()
-         [inilon,inilat,err] = cmems_load(min([day0,dayf]),max([day0,dayf]));
+         [lonv,latv,uvmask,err] = cmems_load(min([day0,dayf]),max([day0,dayf]));
          disp('Loading')
          toc()
          disp(' ')
@@ -57,7 +60,7 @@ function MAIN_lagrangian_diags(year,month)
          % inilat=inilat(1:end-1,:);
          % %--------------------------
 
-         [lonf,latf] = cmems_advect(dayv,inilon,inilat,numdays,freeze);
+         [lonf,latf] = cmems_advect(dayv,lonv,latv,delta0,uvmask,numdays,freeze);
       end % for iadvect = -1:2:1
    end % for iday = 1:31
    clear outpath
